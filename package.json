@@ -1,0 +1,40 @@
+{
+  "name": "guts",
+  "version": "0.0.1",
+  "description": "Better handle vanilla js components.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "karma start",
+    "build": "rollup --config"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xtatanx/guts.git"
+  },
+  "author": "Jhonnatan Gonzalez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xtatanx/guts/issues"
+  },
+  "homepage": "https://github.com/xtatanx/guts#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "jasmine-core": "^3.1.0",
+    "karma": "^2.0.2",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-cli": "^1.0.1",
+    "karma-jasmine": "^1.1.2",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-webpack": "^3.0.0",
+    "rollup": "^0.59.4",
+    "rollup-plugin-babel": "^3.0.4",
+    "webpack": "^4.8.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0"
+  }
+}

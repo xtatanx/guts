@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tab Component</title>
+</head>
+<body>
+  <style>
+    .tabs {
+      max-width: 40%;
+      margin: 0 auto;
+    }
+
+    .tabs__menu {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tabs__tab {
+      padding: 20px;
+      cursor: pointer;
+      background: #d0f2f6;
+      flex-grow: 1;
+      border: none;
+    }
+
+    .tabs__tab:focus,
+    .tabs__tab.active:focus {
+      background: #9fdce3;
+    }
+
+    .tabs__tab.active {
+      background: #9fdce3;
+      font-weight: 700;
+    }
+
+    .tabs__content {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      padding: 20px;
+    }
+  </style>
+  <div id="components">
+    <div class="tabs" data-component="tabs" data-active="1" data-autoplay data-string='sadfasdf' data-obj='{"hello": "world"}'>
+      <div class="tabs__menu" role="tablist" aria-label="Items">
+        <button class="tabs__tab" data-component="tab" data-index="1" aria-labelledby="item1">item 1</button>
+        <button class="tabs__tab" data-component="tab" data-index="2" aria-labelledby="item2">item 2</button>
+        <button class="tabs__tab" data-component="tab" data-index="3" aria-labelledby="item3">item 3</button>
+      </div>
+      <ul class="tabs__content">
+        <li class="tabs__panel" data-component="tab-content" data-index="1" tabindex="0" role="tabpanel" aria-labelledby="item1">content 1</li>
+        <li class="tabs__panel" data-component="tab-content" data-index="2" tabindex="0" role="tabpanel" aria-labelledby="item2">content 2</li>
+        <li class="tabs__panel" data-component="tab-content" data-index="3" tabindex="0" role="tabpanel" aria-labelledby="item3">content 3</li>
+      </ul>
+    </div>
+  </div>
+  <script src="../../dist/guts.js"></script>
+  <script src="Tabs.js"></script>
+  <script src="Tab.js"></script>
+  <script src="TabContent.js"></script>
+  <script>
+    new Guts('#components');
+  </script>
+</body>
+</html>
