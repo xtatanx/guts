@@ -1,6 +1,15 @@
 import { initComponents, initEvents} from './mixins';
 
+/**
+ * Guts Component.
+ */
 class Component {
+  /**
+   * Creates a Guts component.
+   * @param  {Element} element Dom element to be transformed into component.
+   * @param  {Guts|Component} parent Guts instance if root  or a component
+   *   instance if child component.
+   */
   constructor(element, parent=null) {
     this.element = this.ensureElement_(element);
     this.options = this.collectOptions_();
@@ -13,6 +22,10 @@ class Component {
   }
 
 
+  /**
+   * Bind multiple events found in the events property.
+   * @return {Component} For chaining purposes.
+   */
   bindEvents() {
     const events = this.events;
 
@@ -42,6 +55,13 @@ class Component {
   }
 
 
+  /**
+   * Bind a single event.
+   * @param  {string} event Event name
+   * @param  {string} query Element query selector.
+   * @param  {function} method Function to execute when event is fired.
+   * @return {Component} For chaining purposes.
+   */
   bindEvent(event, query, method) {
     if (!query || !query.length) {
       this.element.addEventListener(event, method, false);
@@ -57,6 +77,10 @@ class Component {
   }
 
 
+  /**
+   * Unbind all the events found in the events property.
+   * @return {Component} For chaining purposes.
+   */
   unbindEvents() {
     const events = this.events;
 
@@ -86,6 +110,13 @@ class Component {
   }
 
 
+  /**
+   * Unbind a single event.
+   * @param  {string} event Event name
+   * @param  {string} query Element query selector.
+   * @param  {function} method Function to execute when event is fired.
+   * @return {Component} For chaining purposes.
+   */
   unbindEvent(event, query, method) {
     if (!query || !query.length) {
       this.element.removeEventListener(event, method, false);
@@ -101,6 +132,12 @@ class Component {
   }
 
 
+  /**
+   * Make sure we passed an element.
+   * @param  {Element} element DOM element.
+   * @return {Element} If is instance of Element.
+   * @private
+   */
   ensureElement_(element) {
     if (!element || !(element instanceof Element)) {
       throw new Error('Component should be initialized on an element');
@@ -109,6 +146,12 @@ class Component {
     return element;
   }
 
+
+  /**
+   * Collect options from data attributes.
+   * @return {Object} Options object collected.
+   * @private
+   */
   collectOptions_() {
     const options = {};
     const attributes = [...this.element.attributes]
@@ -125,6 +168,18 @@ class Component {
   }
 
 
+  /**
+   * Parse data attributes as options
+   * @param  {string|object|number} Values that we will try to parse.
+   * @return {string|object|number|boolean} Parsed value.
+   * @private
+   * @example
+   * <div data-auto-play></div> Treated as boolean returns: True
+   * <div data-label="Correct"></div> treated as string returns: "Correct"
+   * <div data-opts='{"foo": "bar"}'></div> Treated as an object returns:
+   *   { foo: "bar"}
+   * <div data-delay="2"></div> Treated as a number returns: 2
+   */
   parseOptions_(value) {
     let newVal;
 
@@ -149,8 +204,15 @@ class Component {
   }
 
 
-
+  /**
+   * Can perform DOm transformations and bind events before the component is
+   *   initialized.
+   */
   initialize() {}
+
+  /**
+   * Triggered once child components are initialized.
+   */
   initialized() {}
 }
 
