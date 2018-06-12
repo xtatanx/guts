@@ -5,7 +5,15 @@ export default {
   output: {
     format: 'iife',  // required
     file: 'dist/guts.js',
-    name: 'Guts'
+    name: 'Guts',
+    banner:
+`/*!
+ * Guts
+ * (c) 2018 Jhonnatan Gonzalez <jhonnatanhxc@gmail.com>
+ * https://github.com/xtatanx/guts
+ *
+ * Licensed under the MIT license.
+ */`
   },
   plugins: [
     babel({

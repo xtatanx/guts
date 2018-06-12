@@ -4,8 +4,9 @@
   "description": "Better handle vanilla js components.",
   "main": "index.js",
   "scripts": {
-    "dev": "karma start",
-    "build": "rollup --config"
+    "dev": "rollup -c config/rollup-dev.js -w",
+    "build": "rollup -c config/rollup-prod.js",
+    "test": "karma start config/karma.conf.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,9 @@
     "karma-webpack": "^3.0.0",
     "rollup": "^0.59.4",
     "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-livereload": "^0.6.0",
+    "rollup-plugin-serve": "^0.4.2",
+    "rollup-plugin-uglify": "^4.0.0",
     "webpack": "^4.8.1"
   },
   "dependencies": {
