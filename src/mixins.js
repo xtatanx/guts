@@ -1,6 +1,18 @@
+/**
+ * Initialize component mixin for Guts and Guts.Component.
+ * @param  {Guts|Component} Component Component to mix.
+ */
 export function initComponents(Component) {
+  /**
+   * Traverse DOM looking for child components and initialize them.
+   */
   Component.prototype.initComponents = function() {
 
+    /**
+     * Initialize a component or if the element is not a component recursively check
+     * for children elements to initialize.
+     * @param  {Element} element DOM element.
+     */
     const initComponent = (element) => {
       if (!element.dataset.component) {
         return traverseDom([...element.children]);
@@ -33,7 +45,18 @@ export function initComponents(Component) {
   };
 };
 
+
+/**
+ * Initialize the events mixin.
+ * @param  {Guts|Component} Component Component to mix.
+ */
 export function initEvents(Component) {
+
+  /**
+   * Listen to an event.
+   * @param  {string} eventName Name of the event to start listening to.
+   * @param  {function} cb Function to execute when triggered.
+   */
   Component.prototype.on = function(eventName, cb) {
 
     if (!this.events[eventName]) {
@@ -45,6 +68,12 @@ export function initEvents(Component) {
     event.push(cb);
   };
 
+
+  /**
+   * Listen to an event once.
+   * @param  {string} eventName Name of the event to start listening to.
+   * @param  {function} cb Function to execute when triggered.
+   */
   Component.prototype.once = function(eventName, cb) {
     const onceFunction = (...args) => {
       this.off(eventName, onceFunction);
@@ -54,6 +83,13 @@ export function initEvents(Component) {
     this.on(eventName, onceFunction);
   };
 
+
+  /**
+   * Emit an event on self and all the way up to the chain of components until
+   *   reaching root(Guts instance).
+   * @param  {string} eventName Name of the event to emit.
+   * @param  {*} args Any arguments we want to pass to the callback.
+   */
   Component.prototype.emit = function(eventName, ...args) {
     let context = this;
 
@@ -70,6 +106,12 @@ export function initEvents(Component) {
     } while(context);
   };
 
+
+  /**
+   * Stop listening on an event.
+   * @param  {string} eventName Name of the event to start listening to.
+   * @param  {function} cb Function that was attached to the listener.
+   */
   Component.prototype.off = function(eventName, cb) {
     const namedEvent = this.events[eventName];
 
@@ -84,6 +126,12 @@ export function initEvents(Component) {
     }
   };
 
+
+  /**
+   * Broadcast an event all the way down into the chain of components.
+   * @param  {string} eventName Name of the event to broadcast.
+   * @param  {*} args Any argument we want to pass to callback.
+   */
   Component.prototype.broadcast = function(eventName, ...args) {
     const children = this.children;
 
@@ -106,6 +154,14 @@ export function initEvents(Component) {
   };
 };
 
+
+/**
+ * Add components mixin. Every instance has a COImponents property it can use
+ * to instantiate them..
+ * @param {Guts|Component} Component Instance to add component.
+ * @param {array[Component]} components Array of components registered by the
+ *   user.
+ */
 export function addComponents(Component, components) {
   Component.prototype.components = components;
 };
